@@ -1,8 +1,8 @@
 (function () {
     $(function () {
-        $('#open').bind('click', openSocket);
-        $('#send').bind('click', send);
-        $('#close').bind('click', closeSocket);
+        $('#open').on('click', openSocket);
+        $('#send').on('click', send);
+        $('#close').on('click', closeSocket);
     });
 
     var webSocket;
@@ -69,6 +69,6 @@
      * @param text 訊息內容
      */
     function writeResponse(text) {
-        $('#messages').text(text).addClass('alert alert-info alert-dismissible');
+        $('#messages').html('<div class="alert alert-info alert-dismissible">' + text + '<button class="close" data-dismiss="alert">&times;</button></div>');
     }
 })();

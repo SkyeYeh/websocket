@@ -7,23 +7,19 @@
 <html>
 <head>
     <title>Websocket</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-md-4">
+        <div class="col-md-12">
             <div class="form-inline">
                 <div class="form-group">
                     <label for="messageinput">輸入</label>
                     <input type="text" id="messageinput" class="form-control"/>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-12 col-md-4">
             <div class="form-group">
                 <button type="button" id="open" class="btn btn-default">開啟 (Open)</button>
                 <button type="button" id="send" class="btn btn-primary">送出 (Send)</button>
@@ -33,7 +29,7 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-md-4">
+        <div class="col-md-12">
             <%-- 回應 --%>
             <div id="messages">
             </div>
