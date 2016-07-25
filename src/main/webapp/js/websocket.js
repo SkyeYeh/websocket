@@ -66,15 +66,14 @@
 
     /**
      * 顯示訊息.
-     * @param text 訊息內容
+     * @param response 訊息內容
      */
-    function writeResponse(text) {
-        var messageHtml = [
-            '<div class="alert alert-info alert-dismissible">',
-            text,
-            '<button class="close" data-dismiss="alert">&times;</button>',
-            '</div>'
-        ].join('\n');
-        $('#messages').html(messageHtml);
+    function writeResponse(response) {
+        var messageView = {
+            response: response
+        };
+        var messageTemplate = $('#messageTemplate').html();
+        var render = Mustache.render(messageTemplate, messageView);
+        $('#messages').html(render);
     }
 })();
