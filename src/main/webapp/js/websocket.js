@@ -69,6 +69,12 @@
      * @param text 訊息內容
      */
     function writeResponse(text) {
-        $('#messages').html('<div class="alert alert-info alert-dismissible">' + text + '<button class="close" data-dismiss="alert">&times;</button></div>');
+        var messageHtml = [
+            '<div class="alert alert-info alert-dismissible">',
+            text,
+            '<button class="close" data-dismiss="alert">&times;</button>',
+            '</div>'
+        ].join('\n');
+        $('#messages').html(messageHtml);
     }
 })();
