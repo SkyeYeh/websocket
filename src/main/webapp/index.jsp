@@ -14,20 +14,26 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-4">
-            <div class="form-group">
-                <label for="messageinput">輸入</label>
-                <input type="text" id="messageinput" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <button type="button" id="open" class="btn btn-default">開啟 (Open)</button>
-                <button type="button" id="send" class="btn btn-primary">送出 (Send)</button>
-                <button type="button" id="close" class="btn btn-default">關閉 (Close)</button>
-            </div>
-            <div class="form-group">
-                <%-- 回應 --%>
-                <div id="messages">
+            <form id="cardForm" class="form-horizontal">
+                <div class="form-group">
+                    <label for="name">名稱</label>
+                    <input type="text" id="name" name="name" class="form-control"/>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="type">類型</label>
+                    <input type="text" id="type" name="type" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="open" class="btn btn-default">開啟 (Open)</button>
+                    <button type="button" id="send" class="btn btn-primary">送出 (Send)</button>
+                    <button type="button" id="close" class="btn btn-default">關閉 (Close)</button>
+                </div>
+                <div class="form-group">
+                    <%-- 回應 --%>
+                    <div id="messages">
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

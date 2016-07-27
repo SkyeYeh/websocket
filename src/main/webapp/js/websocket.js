@@ -46,8 +46,12 @@
      */
     function send() {
         if (Modernizr.websockets) {
-            var text = document.getElementById("messageinput").value;
-            webSocket.send(text);
+            var cardAction = {
+                action: "remove",
+                name: $('#name').val(),
+                type: $('#type').val()
+            };
+            webSocket.send(JSON.stringify(cardAction));
         } else {
             writeResponse("您的瀏覽器不支援 Web Socket");
         }
