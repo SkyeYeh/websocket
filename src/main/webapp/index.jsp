@@ -23,7 +23,7 @@
                     <label for="type">類型</label>
                     <input type="text" id="type" name="type" class="form-control"/>
                 </div>
-                <div class="form-group">
+                <div id="keyAction" class="form-group">
                     <button type="button" id="open" class="btn btn-default">開啟 (Open)</button>
                     <button type="button" id="send" class="btn btn-primary">送出 (Send)</button>
                     <button type="button" id="close" class="btn btn-default">關閉 (Close)</button>
@@ -55,6 +55,10 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
         defer></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"
+        defer></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"
+        defer></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"
         defer></script>
 <script type="text/javascript" src="js/websocket.js" defer></script>
 </body>
