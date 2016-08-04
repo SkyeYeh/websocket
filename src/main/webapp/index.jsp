@@ -24,7 +24,7 @@
                     <input type="text" id="type" name="type" class="form-control"/>
                 </div>
                 <div id="keyAction" class="form-group">
-                    <button type="button" id="open" class="btn btn-default">開啟 (Open)</button>
+                    <%--<button type="button" id="open" class="btn btn-default">開啟 (Open)</button>--%>
                     <button type="button" id="send" class="btn btn-primary">送出 (Send)</button>
                     <button type="button" id="close" class="btn btn-default">關閉 (Close)</button>
                 </div>
