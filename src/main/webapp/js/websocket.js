@@ -1,25 +1,7 @@
 (function (global, $) {
     var WebsocketModel = Backbone.Model.extend({
         webSocket: '',
-        url: 'ws://localhost:8080/websocket/actions',
-        initialize: function () {
-            if (Modernizr.websockets) {
-                this.webSocket = new WebSocket(this.url);
-                this.webSocket.onopen = function (event) {
-                    if (event.data) {
-                        writeResponse(event.data);
-                    }
-                };
-                this.webSocket.onmessage = function (event) {
-                    if (event.data) {
-                        writeResponse(event.data);
-                    }
-                };
-                console.log('已開啟 Web Socket 連線');
-            } else {
-                console.error('您的瀏覽器不支援 Web Socket');
-            }
-        }
+        url: 'ws://localhost:8080/websocket/actions'
     });
 
     // var CardModel = Backbone.Model.extend({
@@ -33,42 +15,59 @@
 
     var WebsocketView = Backbone.View.extend({
         initialize: function () {
-            this.websocketModel = new WebsocketModel();
+            if (Modernizr.websockets) {
+                this.websocketModel = new WebsocketModel();
+            } else {
+                writeResponse('您的瀏覽器不支援 Web Socket');
+            }
             // this.cardModel = new CardModel();
         },
         el: $('#keyAction'),
         events: {
-            'click #open': 'open',
-            'click #send': 'send',
-            'click #close': 'close'
+            'click #open': 'doOpen',
+            'click #send': 'doSend',
+            'click #close': 'doClose'
         },
         websocketModel: '',
         // cardModel: '',
-        /**
-         * 送出.
-         */
-        send: function () {
-            if (Modernizr.websockets) {
-                var cardAction = {
-                    action: "remove",
-                    name: $('#name').val(),
-                    type: $('#type').val()
-                };
-                this.websocketModel.webSocket.send(JSON.stringify(cardAction));
-            } else {
-                writeResponse('您的瀏覽器不支援 Web Socket');
-            }
+        doOpen: function () {
+            var view = this;
+            this.websocketModel.webSocket = new WebSocket(this.websocketModel.url);
+            this.websocketModel.webSocket.onopen = function (evt) {
+                view.onOpen(evt);
+            };
+            this.websocketModel.webSocket.onclose = function (evt) {
+                view.onClose(evt);
+            };
+            this.websocketModel.webSocket.onmessage = function (evt) {
+                view.onMessage(evt);
+            };
+            this.websocketModel.webSocket.onerror = function (evt) {
+                view.onError(evt);
+            };
         },
-        /**
-         * 關閉 Web Socket 連線.
-         */
-        close: function () {
-            if (Modernizr.websockets) {
-                this.websocketModel.webSocket.close();
-                writeResponse('連線已關閉');
-            } else {
-                writeResponse('您的瀏覽器不支援 Web Socket');
-            }
+        onOpen: function (evt) {
+            writeResponse('連線已開啟');
+        },
+        onClose: function (evt) {
+            writeResponse('連線已關閉');
+        },
+        onMessage: function (evt) {
+            writeResponse('回應: ' + evt.data);
+        },
+        onError: function (evt) {
+            writeResponse('錯誤: ' + evt.data);
+        },
+        doSend: function () {
+            var cardAction = {
+                action: "remove",
+                name: $('#name').val(),
+                type: $('#type').val()
+            };
+            this.websocketModel.webSocket.send(JSON.stringify(cardAction));
+        },
+        doClose: function () {
+            this.websocketModel.webSocket.close();
         }
     });
 
@@ -78,7 +77,7 @@
      * 顯示訊息.
      * @param response 訊息內容
      */
-    var writeResponse = function (response) {
+    function writeResponse(response) {
         var messageView = {
             response: response
         };
